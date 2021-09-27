@@ -2,7 +2,7 @@
 
 Ctl-Opt DFTACTGRP(*No);
 
-Dcl-C MAXLINES 500;
+Dcl-C MAXLINES 1000;
 Dcl-C MAXOPTS 22; //11 x number of options
 
 /copy 'headers.rpgle'
@@ -47,8 +47,8 @@ If (gInputFile.FilePtr <> *Null);
       Iter;
     ENDIF;
 
-    gInputFile.RtvData =
-      %xlate(x'00' + x'25' + x'0D' + x'05':'    ':gInputFile.RtvData);
+    // This will replace weird characters with a space
+    gInputFile.RtvData = %xlate(x'00' + x'25' + x'0D' + x'05':'    ':gInputFile.RtvData);
 
     gIndex += 1;
     gMISrc(gIndex) = gInputFile.RtvData;
